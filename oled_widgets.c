@@ -146,24 +146,8 @@ void dispatch_menu_key() {
 
 uint8_t main_current_item;
 
-char *main_lines[] = {
-    "<- Back",
-    "Signal info",
-    "Radio mode",
-    "SMS & USSD",
-    "Wi-Fi",
-    "Speedtest",
-    "TTL & IMEI",
-    "Disable battery",
-    "Add SSH key",
-    "ADB daemon",
-    "Matrix",
-    "Video",
-    "Snake",
-    "User scripts",
-};
-
-char main_lines_num = 14;
+extern char *main_lines[];
+extern char main_lines_num;
 
 void main_init() {
     main_current_item = 0;
@@ -1861,9 +1845,25 @@ void user_scripts_power_key_pressed() {
     enter_widget(USER_CUSTOM_SCRIPT_IDX);
 }
 
-const uint32_t WIDGETS_SIZE = 15;
+const uint32_t WIDGETS_SIZE = 13;
 const uint32_t USER_CUSTOM_SCRIPT_IDX = WIDGETS_SIZE - 1;
-const uint32_t USER_CUSTOM_SCRIPTS_IDX = WIDGETS_SIZE - 2;
+const uint32_t USER_CUSTOM_SCRIPTS_IDX = 1;
+
+char main_lines_num = 12;
+char *main_lines[] = {
+    "<- Back",
+    "User scripts",
+    "Signal info",
+    "Radio mode",
+    "Speedtest",
+    "SMS & USSD",
+    "No battery mode",
+    "Wi-Fi",
+    "TTL & IMEI",
+    "Matrix",
+    "Video",
+    "Snake",
+};
 
 struct led_widget widgets[WIDGETS_SIZE] = {
     {
@@ -1874,6 +1874,16 @@ struct led_widget widgets[WIDGETS_SIZE] = {
         .paint = main_paint,
         .menu_key_handler = main_menu_key_pressed,
         .power_key_handler = main_power_key_pressed,
+        .parent_idx = 0
+    },
+    {
+        .name = "user scripts",
+        .lcd_sleep_ms = 20000,
+        .init = user_scripts_init,
+        .deinit = 0,
+        .paint = user_scripts_paint,
+        .menu_key_handler = user_scripts_menu_key_pressed,
+        .power_key_handler = user_scripts_power_key_pressed,
         .parent_idx = 0
     },
     {
@@ -1897,26 +1907,6 @@ struct led_widget widgets[WIDGETS_SIZE] = {
         .parent_idx = 0
     },
     {
-        .name = "sms and ussd",
-        .lcd_sleep_ms = 60000,
-        .init = sms_and_ussd_init,
-        .deinit = sms_and_ussd_deinit,
-        .paint = sms_and_ussd_paint,
-        .menu_key_handler = sms_and_ussd_menu_key_pressed,
-        .power_key_handler = sms_and_ussd_power_key_pressed,
-        .parent_idx = 0
-    },
-    {
-        .name = "wifi",
-        .lcd_sleep_ms = 15000,
-        .init = wifi_init,
-        .deinit = 0,
-        .paint = wifi_paint,
-        .menu_key_handler = wifi_menu_key_pressed,
-        .power_key_handler = wifi_power_key_pressed,
-        .parent_idx = 0
-    },
-    {
         .name = "speedtest",
         .lcd_sleep_ms = 3600000,
         .init = speedtest_init,
@@ -1927,13 +1917,13 @@ struct led_widget widgets[WIDGETS_SIZE] = {
         .parent_idx = 0
     },
     {
-        .name = "ttl and imei",
-        .lcd_sleep_ms = 15000,
-        .init = ttl_and_imei_init,
-        .deinit = 0,
-        .paint = ttl_and_imei_paint,
-        .menu_key_handler = ttl_and_imei_menu_key_pressed,
-        .power_key_handler = ttl_and_imei_power_key_pressed,
+        .name = "sms and ussd",
+        .lcd_sleep_ms = 60000,
+        .init = sms_and_ussd_init,
+        .deinit = sms_and_ussd_deinit,
+        .paint = sms_and_ussd_paint,
+        .menu_key_handler = sms_and_ussd_menu_key_pressed,
+        .power_key_handler = sms_and_ussd_power_key_pressed,
         .parent_idx = 0
     },
     {
@@ -1947,23 +1937,23 @@ struct led_widget widgets[WIDGETS_SIZE] = {
         .parent_idx = 0
     },
     {
-        .name = "add ssh",
-        .lcd_sleep_ms = 120000,
-        .init = add_ssh_init,
-        .deinit = add_ssh_deinit,
-        .paint = add_ssh_paint,
-        .menu_key_handler = leave_widget,
-        .power_key_handler = add_ssh_power_key_pressed,
+        .name = "wifi",
+        .lcd_sleep_ms = 15000,
+        .init = wifi_init,
+        .deinit = 0,
+        .paint = wifi_paint,
+        .menu_key_handler = wifi_menu_key_pressed,
+        .power_key_handler = wifi_power_key_pressed,
         .parent_idx = 0
     },
     {
-        .name = "adbd",
-        .lcd_sleep_ms = 60000,
-        .init = adbd_init,
+        .name = "ttl and imei",
+        .lcd_sleep_ms = 15000,
+        .init = ttl_and_imei_init,
         .deinit = 0,
-        .paint = adbd_paint,
-        .menu_key_handler = leave_widget,
-        .power_key_handler = adbd_power_key_pressed,
+        .paint = ttl_and_imei_paint,
+        .menu_key_handler = ttl_and_imei_menu_key_pressed,
+        .power_key_handler = ttl_and_imei_power_key_pressed,
         .parent_idx = 0
     },
     {
@@ -1994,16 +1984,6 @@ struct led_widget widgets[WIDGETS_SIZE] = {
         .paint = snake_paint,
         .menu_key_handler = snake_sched_turn_left,
         .power_key_handler = snake_sched_turn_right,
-        .parent_idx = 0
-    },
-    {
-        .name = "user scripts",
-        .lcd_sleep_ms = 20000,
-        .init = user_scripts_init,
-        .deinit = 0,
-        .paint = user_scripts_paint,
-        .menu_key_handler = user_scripts_menu_key_pressed,
-        .power_key_handler = user_scripts_power_key_pressed,
         .parent_idx = 0
     },
     {
