@@ -126,6 +126,7 @@ void lcd_refresh_screen(struct lcd_screen* screen) {
 }
 
 int register_notify_handler(int subsystemid, void *notify_handler_sync, void *notify_handler_async_orig) {
+    fprintf(stderr, "register_notify_handler: %d - hooked\n", subsystemid);
     unsetenv("LD_PRELOAD");
 
     static int (*register_notify_handler_real)(int, void *, void *) = NULL;

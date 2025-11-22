@@ -344,7 +344,7 @@ void mobile_process_callback(int good, char *buf) {
 
 
 void update_measurements() {
-    char* cmd = "/app/hijack/bin/device_webhook_client device signal 1 1;atc 'AT^LCACELL?'";
+    char* cmd = HIJACK_DIR "/bin/device_webhook_client device signal 1 1;atc 'AT^LCACELL?'";
     create_process(cmd, mobile_process_callback);
 }
 
@@ -770,7 +770,7 @@ void execute_menu_item(uint8_t curr_item, char items[][MAXITEMLEN], char *script
 }
 // ---------------------------------- NO BATTERY MODE --------------------------
 
-char* no_battery_mode_script = "/app/hijack/scripts/no_battery_mode.sh";
+char* no_battery_mode_script = HIJACK_DIR "/scripts/no_battery_mode.sh";
 uint8_t no_battery_mode_menu_cur_item = 0;
 char no_battery_mode_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 
@@ -798,7 +798,7 @@ void no_battery_mode_power_key_pressed() {
 
 // -------------------------------------- SMS AND USSD  -------------------------
 
-char* sms_and_ussd_script = "/app/hijack/scripts/sms_and_ussd.sh";
+char* sms_and_ussd_script = HIJACK_DIR "/scripts/sms_and_ussd.sh";
 uint8_t sms_and_ussd_menu_cur_item = 0;
 char sms_and_ussd_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 uint32_t sms_and_ussd_timer = 0;
@@ -874,7 +874,7 @@ void sms_and_ussd_power_key_pressed() {
 
 // -------------------------------------- RADIO MODE -------------------------
 
-char* radio_mode_script = "/app/hijack/scripts/radio_mode.sh";
+char* radio_mode_script = HIJACK_DIR "/scripts/radio_mode.sh";
 uint8_t radio_mode_menu_cur_item = 0;
 char radio_mode_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 
@@ -902,7 +902,7 @@ void radio_mode_power_key_pressed() {
 
 // ------------------------------------- WI-FI ------------------------------
 
-char* wifi_script = "/app/hijack/scripts/wifi.sh";
+char* wifi_script = HIJACK_DIR "/scripts/wifi.sh";
 uint8_t wifi_menu_cur_item = 0;
 char wifi_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 
@@ -1172,7 +1172,7 @@ void speedtest_menu_key_pressed() {
 
 // ------------------------------------- TTL and IMEI --------------------------
 
-char* ttl_and_imei_script = "/app/hijack/scripts/ttl_and_imei.sh";
+char* ttl_and_imei_script = HIJACK_DIR "/scripts/ttl_and_imei.sh";
 uint8_t ttl_and_imei_menu_cur_item = 0;
 char ttl_and_imei_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 
@@ -1804,7 +1804,7 @@ void user_custom_script_power_key_pressed() {
 
 // -------------------------------------- USER SCRIPTS -------------------------
 
-char* user_scripts_script = "/app/hijack/scripts/user_scripts.sh";
+char* user_scripts_script = HIJACK_DIR "/scripts/user_scripts.sh";
 uint8_t user_scripts_menu_cur_item = 0;
 char user_scripts_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
 

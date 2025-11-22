@@ -1,6 +1,10 @@
 #ifndef OLED_H
 #define OLED_H
 
+#ifndef HIJACK_DIR
+#define HIJACK_DIR "/app/hijack"
+#endif
+
 #include <stdint.h>
 
 #define UNUSED(x) (void)(x)

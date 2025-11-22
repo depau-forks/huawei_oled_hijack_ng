@@ -5,6 +5,9 @@ all: oled_hijack.so device_webhook.so device_webhook_client sms_webhook.so sms_w
 oled_hijack.so: oled_hijack.c oled_paint.c oled_widgets.c oled_process.c oled.h oled_font.h
 	$(CC) -W -shared -ldl -fPIC -O2 -s -o oled_hijack.so oled_hijack.c oled_paint.c oled_process.c oled_widgets.c
 
+oled_hijack_debug.so: oled_hijack.c oled_paint.c oled_widgets.c oled_process.c oled.h oled_font.h
+	$(CC) -W -shared -ldl -fPIC -O0 -ggdb -o oled_hijack_debug.so oled_hijack.c oled_paint.c oled_process.c oled_widgets.c $(CFLAGS)
+
 device_webhook.so: web_hook.c
 	$(CC) -shared -ldl -fPIC -O2 -s -pthread -DHOOK -DSOCK_NAME='"/var/device_webhook"' -o device_webhook.so web_hook.c
 
