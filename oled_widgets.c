@@ -1430,8 +1430,17 @@ int video_create_and_connect_socket(uint32_t host, int port, int recv_bufsize) {
     }
 
     if (recv_bufsize && setsockopt(s, SOL_SOCKET, SO_RCVBUFFORCE, &recv_bufsize, sizeof(recv_bufsize)) < 0 ) {
-        close(s);
-        return -1;
+        if (errno == EPERM) {
+            if (setsockopt(s, SOL_SOCKET, SO_RCVBUF, &recv_bufsize, sizeof(recv_bufsize)) < 0) {
+                perror("setsockopt");
+                close(s);
+                return -1;
+            }
+        } else {
+            perror("setsockopt");
+            close(s);
+            return -1;
+        }
     }
 
     struct sockaddr_in serv_addr;
