@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "oled.h"
 #include "oled_font.h"

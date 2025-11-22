@@ -1,6 +1,8 @@
 #ifndef OLED_H
 #define OLED_H
 
+#include <stdint.h>
+
 #define UNUSED(x) (void)(x)
 
 #define SUBSYSTEM_GPIO 21002

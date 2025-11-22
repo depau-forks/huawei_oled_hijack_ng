@@ -7,10 +7,13 @@
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #include <sys/capability.h>
 
 #include "oled.h"
+
 
 extern uint8_t is_small_screen;
 

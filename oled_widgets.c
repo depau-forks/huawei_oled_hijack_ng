@@ -13,6 +13,10 @@
 #include "oled.h"
 #include "oled_font.h"
 
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
+
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
@@ -42,7 +46,8 @@ uint32_t active_widget = 0;
 
 // these are decared in the end
 struct led_widget widgets[];
-const uint32_t WIDGETS_SIZE;
+
+#define WIDGETS_SIZE 13
 const uint32_t USER_CUSTOM_SCRIPT_IDX;
 
 uint32_t lcd_timer = 0;
@@ -254,7 +259,7 @@ int32_t mobile_dl_bw = 0;
 int32_t mobile_band = 0;
 int32_t mobile_ca = -1;
 
-const int32_t MAX_LAST_RSSI = 128;
+#define MAX_LAST_RSSI 128
 int32_t last_rssi[MAX_LAST_RSSI] = {};
 
 int mobile_parse_ca(char *buf) {
@@ -550,8 +555,8 @@ void mobile_switch_mode() {
 
 
 // ---------------------------- COMMON EXTERNAL MENU FUNCTIONS -------------------------
-const uint8_t MAXMENUITEMS = 128;
-const int MAXITEMLEN = 64;
+#define MAXMENUITEMS 128
+#define MAXITEMLEN 256
 int lines_per_page = 7;
 
 void make_items_from_buf(char* buf, char items[][MAXITEMLEN]) {
@@ -928,7 +933,7 @@ void wifi_power_key_pressed() {
 char* speedtest_cmd = "echo YES|HOME=/root /system/bin/busyboxx script -c '/system/xbin/speedtest -p -f json' /dev/null > /tmp/speedtest";
 const char* SPEEDTEST_FILE_NAME = "/tmp/speedtest";
 uint32_t speedtest_timer = 0;
-const int32_t MAX_LAST_SPEED_MEASUREMENTS = 512;
+#define MAX_LAST_SPEED_MEASUREMENTS 512
 float speedtest_download_bandwidths[MAX_LAST_SPEED_MEASUREMENTS] = {-1};
 float speedtest_upload_bandwidths[MAX_LAST_SPEED_MEASUREMENTS] = {-1};
 float speedtest_download_percentages[MAX_LAST_SPEED_MEASUREMENTS] = {-1};
@@ -1200,7 +1205,7 @@ uint8_t add_ssh_is_paused = 0;
 uint8_t add_ssh_is_failed = 0;
 uint32_t add_ssh_tick_num = 0;
 
-const int MAX_PIN_LEN = 32;
+#define MAX_PIN_LEN 32
 char add_ssh_pin[MAX_PIN_LEN] = {};
 uint32_t add_ssh_timer = 0;
 
@@ -1602,7 +1607,7 @@ int snake_score = 0;
 uint32_t snake_len = 0;
 uint32_t snake_field_width = 16;
 uint32_t snake_field_height = 14;
-const uint32_t SNAKE_MAX_LEN = 16 * 16;
+#define SNAKE_MAX_LEN (16 * 16)
 const uint32_t SNAKE_SQUARE_SIZE = 8;
 const uint32_t SNAKE_SCORE_SPACE = 16;
 int snake_dead = 0;
@@ -1770,7 +1775,7 @@ void snake_sched_turn_right() {
 }
 
 // -------------------------------------- USER CUSTOM SCRIPT -------------------------
-const int MAXCUSTOMSCRIPTLEN = 128;
+#define MAXCUSTOMSCRIPTLEN 128
 char user_custom_script_script[MAXCUSTOMSCRIPTLEN] = {0};
 uint8_t user_custom_script_menu_cur_item = 0;
 char user_custom_script_menu_items[MAXMENUITEMS][MAXITEMLEN] = {};
@@ -1845,7 +1850,6 @@ void user_scripts_power_key_pressed() {
     enter_widget(USER_CUSTOM_SCRIPT_IDX);
 }
 
-const uint32_t WIDGETS_SIZE = 13;
 const uint32_t USER_CUSTOM_SCRIPT_IDX = WIDGETS_SIZE - 1;
 const uint32_t USER_CUSTOM_SCRIPTS_IDX = 1;
 

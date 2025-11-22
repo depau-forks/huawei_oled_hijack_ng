@@ -1,7 +1,11 @@
 #define _GNU_SOURCE
-#include <stdlib.h>
-#include <unistd.h>
+#include <errno.h>
 #include <fcntl.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 #include <sys/wait.h>
 
@@ -16,7 +20,7 @@ extern uint32_t (*timer_delete_ex)(uint32_t);
 long process_output_fd = -1;
 pid_t child_pid = 0;
 uint32_t process_pooling_timer = 0;
-const int PROC_BUF_SIZE = 32768;
+#define PROC_BUF_SIZE 32768
 char process_data_buf[PROC_BUF_SIZE + 1] = {0};
 int process_data_len = 0;
 void (*process_callback)(int, char *) = 0;
